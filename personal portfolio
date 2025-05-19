@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+
+  <title>nahom - Portfolio</title>
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: cadetblue;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: black;
+      color: white;
+      text-align: center;
+      padding: 30px 0;
+    }
+
+    header h1 {
+      font-size: 2.5em;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #444;
+    }
+
+    nav a {
+      color: white;
+      padding: 15px;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    nav a:hover {
+      background-color: #555;
+    }
+
+    section {
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    .about, .projects, .contact {
+      margin-bottom: 50px;
+    }
+
+    h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    .about p {
+      font-size: 1.2em;
+      margin-top: 20px;
+    }
+
+    .projects .project {
+      display: inline-block;
+      width: 30%;
+      margin: 10px;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      transition: transform 0.3s;
+    }
+
+    .projects .project:hover {
+      transform: translateY(-30px);
+    }
+
+    .projects img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .contact form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .contact input, .contact textarea {
+      width: 300px;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1em;
+    }
+
+    .contact button {
+      padding: 10px 20px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1.2em;
+    }
+
+    .contact button:hover {
+      background-color: #555;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #333;
+      color: white;
+      margin-top: 50px;
+    }
+
+    footer p {
+      font-size: 1em;
+    }
+
+  </style>
+</head>
+<body>
+
+
+  <header>
+    <h1>NAHOM</h1>
+    <p>Web Developer | Designer</p>
+  </header>
+
+  
+  <nav>
+    <a href="#about">About Me</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+
+  <section id="about" class="about">
+    <h2>About Me</h2>
+    <p>Hello! I'm a passionate web developer with a love for creating clean and functional websites. With a background in computer Engineering, I enjoy solving problems and building beautiful user experiences. I specialize in front-end development.</p>
+  </section>
+
+ 
+  <section id="projects" class="projects">
+    <h2>Projects</h2>
+    <div class="project">
+      <img src="nopic" alt="">
+      <h3>Project 1</h3>
+      <p>This is loog in page developed using bootstrap with glass morphism . </p>
+    </div>
+    <div class="project">
+      <img src="no pic.jpg" alt="">
+      <h3>Project 2</h3>
+      <p>THis is my portfolio project that is build using internal css</p>
+    </div>
+    <div class="project">
+      <img src="no pic.png" alt="">
+      <h3>Project 3</h3>
+      <p>new project to be under developed.</p>
+    </div>
+  </section>
+
+
+  <section id="contact" class="contact">
+    <h2>Contact Me</h2>
+    <form action="#" method="post">
+      <input type="text" name="name" placeholder="enter Your Name" required>
+      <input type="email" name="email" placeholder="enter Your Email" required>
+      <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+
+  <footer>
+    <p>&copy; 2025 Nahom. All Rights Reserved.</p>
+  </footer>
+
+</body>
+</html>
