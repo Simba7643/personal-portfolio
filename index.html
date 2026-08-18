@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nahom Guta — Computer Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0A1220;
+    --bg-panel: #101B2D;
+    --bg-panel-2: #0D1826;
+    --line: rgba(232,163,61,0.16);
+    --line-strong: rgba(232,163,61,0.35);
+    --gold: #E8A33D;
+    --gold-soft: rgba(232,163,61,0.12);
+    --green: #3FBF7F;
+    --red-flag: #C1443A;
+    --text: #E9EEF5;
+    --text-dim: #8FA0B8;
+    --text-faint: #5A6C85;
+    --mono: 'JetBrains Mono', monospace;
+    --display: 'Space Grotesk', sans-serif;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--display);
+    line-height:1.6;
+    overflow-x:hidden;
+    background-image:
+      linear-gradient(rgba(232,163,61,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232,163,61,0.035) 1px, transparent 1px);
+    background-size: 42px 42px;
+  }
+
+  ::selection{ background:var(--gold); color:#0A1220; }
+
+  a{ color:inherit; text-decoration:none; }
+
+  .wrap{ max-width:1120px; margin:0 auto; padding:0 32px; }
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(10,18,32,0.85);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1120px; margin:0 auto; padding:16px 32px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{
+    font-family:var(--mono); font-weight:600; letter-spacing:0.5px;
+    display:flex; align-items:center; gap:10px; font-size:0.95em;
+  }
+  .brand .dot{
+    width:8px; height:8px; border-radius:50%; background:var(--green);
+    box-shadow:0 0 8px var(--green);
+    animation:blink 2.4s ease-in-out infinite;
+  }
+  @keyframes blink{ 0%,100%{opacity:1;} 50%{opacity:0.35;} }
+  nav.links{ display:flex; gap:6px; }
+  nav.links a{
+    font-family:var(--mono); font-size:0.82em; color:var(--text-dim);
+    padding:8px 14px; border-radius:4px; transition:all .2s;
+    text-transform:uppercase; letter-spacing:0.5px;
+  }
+  nav.links a:hover{ color:var(--gold); background:var(--gold-soft); }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:170px 0 100px;
+    display:grid; grid-template-columns:1.3fr 0.9fr; gap:60px; align-items:center;
+  }
+  .eyebrow{
+    font-family:var(--mono); font-size:0.8em; color:var(--gold);
+    letter-spacing:2px; text-transform:uppercase; margin-bottom:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{ content:'//'; color:var(--text-faint); }
+  h1.name{
+    font-size:3.4em; font-weight:700; line-height:1.05; letter-spacing:-1px;
+    margin-bottom:18px;
+  }
+  h1.name span{ color:var(--gold); }
+  .role-line{
+    font-family:var(--mono); font-size:1.15em; color:var(--text-dim);
+    margin-bottom:26px; min-height:1.6em;
+  }
+  .role-line .caret{
+    display:inline-block; width:9px; height:1.1em; background:var(--gold);
+    vertical-align:middle; margin-left:2px; animation:caret 1s steps(1) infinite;
+  }
+  @keyframes caret{ 0%,49%{opacity:1;} 50%,100%{opacity:0;} }
+  .hero p.lede{ max-width:520px; color:var(--text-dim); font-size:1.02em; margin-bottom:32px; }
+  .ai-badge{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:var(--mono); font-size:0.8em; color:var(--gold);
+    background:linear-gradient(90deg, rgba(232,163,61,0.14), rgba(232,163,61,0.04));
+    border:1px solid var(--line-strong); padding:10px 18px; border-radius:30px;
+    margin-bottom:26px; letter-spacing:0.3px;
+  }
+  .ai-badge-dot{
+    width:8px; height:8px; border-radius:50%; background:var(--gold);
+    box-shadow:0 0 10px var(--gold); animation:blink 2s ease-in-out infinite;
+  }
+  .cta-row{ display:flex; gap:14px; flex-wrap:wrap; }
+  .btn{
+    font-family:var(--mono); font-size:0.85em; padding:13px 24px; border-radius:4px;
+    letter-spacing:0.4px; transition:all .2s; display:inline-flex; align-items:center; gap:8px;
+    border:1px solid transparent; cursor:pointer;
+  }
+  .btn-solid{ background:var(--gold); color:#0A1220; font-weight:600; }
+  .btn-solid:hover{ background:#f3b354; transform:translateY(-2px); }
+  .btn-ghost{ border-color:var(--line-strong); color:var(--text); }
+  .btn-ghost:hover{ border-color:var(--gold); color:var(--gold); }
+
+  /* profile frame */
+  .avatar-wrap{ position:relative; display:flex; justify-content:center; align-items:center; }
+  .hex-frame{
+    width:280px; height:280px; position:relative;
+    clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+    background: linear-gradient(160deg, var(--bg-panel), var(--bg-panel-2));
+    border:1px solid var(--line-strong);
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+  .hex-frame img{ width:100%; height:100%; object-fit:cover; display:none; }
+  .hex-frame.has-photo img{ display:block; }
+  .hex-frame.has-photo .placeholder-text{ display:none; }
+  .placeholder-text{
+    font-family:var(--mono); font-size:0.75em; color:var(--text-faint);
+    text-align:center; line-height:1.8; padding:20px;
+  }
+  .placeholder-text b{ color:var(--gold); display:block; font-size:1.6em; margin-bottom:8px;}
+  .scan-ring{
+    position:absolute; width:330px; height:330px; border-radius:50%;
+    border:1px dashed var(--line-strong);
+    animation: spin 18s linear infinite;
+  }
+  @keyframes spin{ from{ transform:rotate(0deg);} to{ transform:rotate(360deg);} }
+
+  /* ---------- STATUS BAR (signature element) ---------- */
+  .status-bar{
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    background:var(--bg-panel-2);
+    padding:26px 0;
+  }
+  .status-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:20px;
+  }
+  .stat{
+    font-family:var(--mono); text-align:center; padding:0 10px; position:relative;
+  }
+  .stat:not(:last-child)::after{
+    content:''; position:absolute; right:-10px; top:10%; height:80%; width:1px;
+    background:var(--line);
+  }
+  .stat .val{
+    font-size:1.9em; font-weight:600; color:var(--gold);
+    display:flex; align-items:baseline; justify-content:center; gap:2px;
+  }
+  .stat .label{ font-size:0.7em; color:var(--text-faint); text-transform:uppercase; letter-spacing:1px; margin-top:6px; }
+  .stat .src{ font-size:0.62em; color:var(--text-faint); margin-top:3px; opacity:0.7;}
+
+  /* ---------- SECTION GENERIC ---------- */
+  section{ padding:100px 0; }
+  .section-head{ margin-bottom:56px; }
+  .section-head .eyebrow{ margin-bottom:10px; }
+  h2.section-title{ font-size:2.1em; font-weight:700; letter-spacing:-0.5px; }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:60px; }
+  .about-grid p{ color:var(--text-dim); margin-bottom:16px; max-width:520px; }
+  .about-grid strong{ color:var(--text); }
+  .facts{ display:flex; flex-direction:column; gap:0; border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+  .fact{
+    display:flex; justify-content:space-between; padding:16px 20px;
+    border-bottom:1px solid var(--line); font-family:var(--mono); font-size:0.85em;
+  }
+  .fact:last-child{ border-bottom:none; }
+  .fact span:first-child{ color:var(--text-faint); }
+  .fact span:last-child{ color:var(--text); text-align:right; }
+
+  /* ---------- PROJECTS ---------- */
+  .projects-list{ display:flex; flex-direction:column; gap:22px; }
+  .project-card{
+    border:1px solid var(--line); border-radius:10px; background:var(--bg-panel);
+    padding:32px; position:relative; overflow:hidden; transition:border-color .25s, transform .25s;
+  }
+  .project-card:hover{ border-color:var(--line-strong); transform:translateY(-3px); }
+  .project-card::before{
+    content:''; position:absolute; top:0; left:0; width:4px; height:100%;
+    background:var(--gold); opacity:0.7;
+  }
+  .project-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:20px; flex-wrap:wrap; margin-bottom:14px; }
+  .project-tag{
+    font-family:var(--mono); font-size:0.7em; color:var(--gold);
+    border:1px solid var(--line-strong); padding:4px 10px; border-radius:20px;
+    text-transform:uppercase; letter-spacing:1px; white-space:nowrap;
+  }
+  .project-card h3{ font-size:1.4em; margin-bottom:6px; }
+  .project-card p{ color:var(--text-dim); font-size:0.96em; max-width:640px; margin-bottom:16px;}
+  .stack-row{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
+  .chip{
+    font-family:var(--mono); font-size:0.72em; color:var(--text-dim);
+    background:rgba(255,255,255,0.03); border:1px solid var(--line);
+    padding:5px 10px; border-radius:5px;
+  }
+  .project-metrics{ display:flex; gap:28px; flex-wrap:wrap; margin-bottom:6px; }
+  .pm{ font-family:var(--mono); font-size:0.78em; color:var(--text-faint); }
+  .pm b{ color:var(--green); font-size:1.1em; display:block; }
+
+  /* attractive project action buttons */
+  .project-links{ margin-top:18px; display:flex; gap:12px; flex-wrap:wrap; }
+  .project-btn{
+    font-family:var(--mono); font-size:0.78em; letter-spacing:0.3px;
+    padding:10px 18px; border-radius:6px; display:inline-flex; align-items:center; gap:8px;
+    border:1px solid var(--line-strong); color:var(--gold);
+    background:rgba(232,163,61,0.06);
+    transition:all .22s ease;
+  }
+  .project-btn::before{ content:'↗'; font-size:0.95em; transition:transform .22s ease; }
+  .project-btn:hover{
+    background:var(--gold); color:#0A1220; transform:translateY(-2px);
+    box-shadow:0 6px 18px rgba(232,163,61,0.25);
+  }
+  .project-btn:hover::before{ transform:translate(2px,-2px); }
+  .project-btn.ghost{
+    color:var(--text-dim); background:transparent; border-color:var(--line);
+  }
+  .project-btn.ghost:hover{
+    color:var(--gold); border-color:var(--gold); background:var(--gold-soft);
+    box-shadow:none;
+  }
+
+  .project-card.upcoming{ opacity:0.6; border-style:dashed; }
+  .project-card.upcoming::before{ background:var(--text-faint); }
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .skill-block{
+    border:1px solid var(--line); border-radius:8px; padding:22px; background:var(--bg-panel-2);
+  }
+  .skill-block.highlight{
+    border-color:var(--line-strong);
+    background:linear-gradient(160deg, rgba(232,163,61,0.08), var(--bg-panel-2));
+  }
+  .skill-block h4{
+    font-family:var(--mono); font-size:0.78em; text-transform:uppercase; color:var(--gold);
+    letter-spacing:1px; margin-bottom:14px;
+  }
+  .skill-block .skill-note{
+    font-size:0.82em; color:var(--text-dim); margin-bottom:14px; line-height:1.55;
+  }
+  .skill-tags{ display:flex; flex-wrap:wrap; gap:8px; }
+  .skill-tags span{
+    font-size:0.82em; color:var(--text-dim); background:rgba(255,255,255,0.03);
+    padding:6px 12px; border-radius:5px; border:1px solid var(--line);
+  }
+
+  /* ---------- EXPERIENCE ---------- */
+  .timeline{ border-left:1px solid var(--line-strong); padding-left:30px; display:flex; flex-direction:column; gap:36px; margin-left:6px;}
+  .tl-item{ position:relative; }
+  .tl-item::before{
+    content:''; position:absolute; left:-36px; top:4px; width:11px; height:11px;
+    border-radius:50%; background:var(--bg); border:2px solid var(--gold);
+  }
+  .tl-item .when{ font-family:var(--mono); font-size:0.75em; color:var(--text-faint); text-transform:uppercase; letter-spacing:1px; }
+  .tl-item h4{ font-size:1.15em; margin:6px 0 6px; }
+  .tl-item p{ color:var(--text-dim); max-width:560px; font-size:0.95em; }
+
+  /* ---------- CONTACT ---------- */
+  .contact-box{
+    border:1px solid var(--line); border-radius:10px; background:var(--bg-panel);
+    padding:48px; display:grid; grid-template-columns:1fr 1fr; gap:50px;
+  }
+  .contact-info p{ color:var(--text-dim); margin-bottom:24px; max-width:340px; }
+  .contact-links{ display:flex; flex-direction:column; gap:14px; }
+  .contact-links a{
+    font-family:var(--mono); font-size:0.9em; color:var(--text); display:flex; gap:10px; align-items:center;
+    padding:10px 0; border-bottom:1px solid var(--line);
+  }
+  .contact-links a:hover{ color:var(--gold); }
+  .contact-links .k{ color:var(--text-faint); width:90px; display:inline-block; font-size:0.85em;}
+
+  form.secure-form{ display:flex; flex-direction:column; gap:14px; }
+  .secure-form label{
+    font-family:var(--mono); font-size:0.7em; color:var(--text-faint);
+    text-transform:uppercase; letter-spacing:1px; margin-bottom:-8px;
+  }
+  .secure-form input, .secure-form textarea{
+    background:var(--bg-panel-2); border:1px solid var(--line); color:var(--text);
+    padding:12px 14px; border-radius:5px; font-family:var(--display); font-size:0.92em;
+    outline:none; transition:border-color .2s;
+  }
+  .secure-form input:focus, .secure-form textarea:focus{ border-color:var(--gold); }
+  .secure-form button{
+    margin-top:6px; font-family:var(--mono); background:var(--gold); color:#0A1220;
+    border:none; padding:13px; border-radius:5px; font-weight:600; cursor:pointer;
+    letter-spacing:0.4px; transition:all .2s;
+  }
+  .secure-form button:hover{ background:#f3b354; }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    border-top:1px solid var(--line); padding:34px 0; text-align:center;
+    font-family:var(--mono); font-size:0.78em; color:var(--text-faint);
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 860px){
+    .hero{ grid-template-columns:1fr; padding-top:150px; text-align:left; }
+    .avatar-wrap{ order:-1; margin-bottom:20px; }
+    .hex-frame{ width:200px; height:200px; }
+    .scan-ring{ width:240px; height:240px; }
+    .status-grid{ grid-template-columns:repeat(2,1fr); row-gap:24px; }
+    .stat:nth-child(2)::after{ display:none; }
+    .about-grid{ grid-template-columns:1fr; }
+    .skills-grid{ grid-template-columns:1fr 1fr; }
+    .contact-box{ grid-template-columns:1fr; padding:32px; }
+    nav.links{ display:none; }
+    h1.name{ font-size:2.4em; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="brand"><span class="dot"></span> NAHOM.GUTA // ENGINEER</div>
+    <nav class="links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero wrap">
+  <div>
+    <div class="eyebrow">Debre Berhan University · B.Sc. Electrical &amp; Computer Engineering (Computer Eng. Stream)</div>
+    <h1 class="name">Nahom Guta <span>Degefa</span></h1>
+    <div class="role-line" id="roleText"></div>
+    <p class="lede">I build and secure systems — from network infrastructure to machine-learning-driven attack detection. <strong style="color:var(--text)">I code with AI</strong> — AI-assisted, automation-driven development is my core workflow, and it's how I ship real, working projects fast. Recently graduated and looking to bring a security-first, problem-solving mindset to a network, systems, or support engineering team.</p>
+    <div class="ai-badge">
+      <span class="ai-badge-dot"></span>
+      AI-Assisted Coder · I build with AI &amp; automation
+    </div>
+    <div class="cta-row">
+      <a href="#projects" class="btn btn-solid">View Projects</a>
+      <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+  <div class="avatar-wrap">
+    <div class="scan-ring"></div>
+    <div class="hex-frame" id="hexFrame">
+      <img src="image/img.PNG" alt="Nahom Guta Degefa" id="profileImg">
+      <div class="placeholder-text">
+        <b>+</b>
+        Add your photo<br>
+        replace <code></code><br>with your image file
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="status-bar">
+  <div class="wrap status-grid">
+    <div class="stat">
+      <div class="val" data-target="95.25" data-suffix="%">0%</div>
+      <div class="label">Detection Rate</div>
+      <div class="src">Attack Detection System</div>
+    </div>
+    <div class="stat">
+      <div class="val" data-target="2" data-suffix="%">0%</div>
+      <div class="label">False Positive Rate</div>
+      <div class="src">Isolation Forest model</div>
+    </div>
+    <div class="stat">
+      <div class="val" data-target="18" data-suffix="ms">0ms</div>
+      <div class="label">Processing Latency</div>
+      <div class="src">Real-time monitoring</div>
+    </div>
+    <div class="stat">
+      <div class="val" data-target="6" data-suffix="">0</div>
+      <div class="label">Projects Shipped</div>
+      <div class="src">Thesis + independent builds</div>
+    </div>
+  </div>
+</div>
+
+<section id="about" class="wrap">
+  <div class="section-head">
+    <div class="eyebrow">About</div>
+    <h2 class="section-title">Who I am</h2>
+  </div>
+  <div class="about-grid">
+    <div>
+      <p>I'm a recent <strong>B.Sc. graduate in Electrical &amp; Computer Engineering (Computer Engineering stream)</strong> from Debre Berhan University, Ethiopia. My coursework spans software engineering, digital systems, computer architecture, and networks — and my project work has pushed that further into cybersecurity and applied machine learning.</p>
+      <p>During my internship at <strong>INSA (Ethiopian Cyber Security Institute)</strong>, I worked hands-on with penetration testing, which shaped how I think about building systems: assume they'll be attacked, and design monitoring in from day one.</p>
+      <p><strong>I code with AI.</strong> AI-assisted, prompt-driven development and automation are core to how I build — I use them to move from idea to a real, working system fast, without cutting corners on quality or structure. It's part of nearly every project below, from an AI summarizer to a full campus social platform.</p>
+      <p>I'm now looking for a role where I can grow as a <strong>network, systems, or support engineer</strong> — and eventually, build my own ventures.</p>
+    </div>
+    <div class="facts">
+      <div class="fact"><span>Location</span><span>Ethiopia</span></div>
+      <div class="fact"><span>Degree</span><span>B.Sc. Electrical &amp; Computer Eng. (Computer Stream)</span></div>
+      <div class="fact"><span>University</span><span>Debre Berhan University</span></div>
+      <div class="fact"><span>Internship</span><span>INSA — Penetration Testing</span></div>
+      <div class="fact"><span>Focus</span><span>Networks · Security · ML</span></div>
+      <div class="fact"><span>Status</span><span style="color:#3FBF7F">Open to opportunities</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="wrap">
+  <div class="section-head">
+    <div class="eyebrow">Projects</div>
+    <h2 class="section-title">Things I've built</h2>
+  </div>
+  <div class="projects-list">
+
+    <div class="project-card">
+      <div class="project-top">
+        <div>
+          <h3>Web-Based Cyber Attack Detection &amp; Monitoring System</h3>
+        </div>
+        <div class="project-tag">B.Sc. Thesis</div>
+      </div>
+      <p>A full-stack security monitoring platform that detects network attacks in real time using an <strong>Isolation Forest</strong> machine-learning model, with a live admin dashboard for visualizing and responding to threats as they happen. Built with Abebe Abreha, advised by Bilew A.</p>
+      <div class="stack-row">
+        <span class="chip">Python</span>
+        <span class="chip">Isolation Forest / ML</span>
+        <span class="chip">MySQL</span>
+        <span class="chip">Leaflet.js maps</span>
+        <span class="chip">Telegram Bot API</span>
+        <span class="chip">OTP / Secure Auth</span>
+      </div>
+      <div class="project-metrics">
+        <div class="pm"><b>95.25%</b>Detection Rate</div>
+        <div class="pm"><b>2%</b>False Positive Rate</div>
+        <div class="pm"><b>18ms</b>Processing Latency</div>
+      </div>
+      <p style="margin-top:6px; font-size:0.85em; color:var(--text-faint);">Includes a local, rule-based investigation engine for analyzing flagged events, a geo-mapped admin dashboard, and live Telegram alerts for incident response.</p>
+      <div class="project-links">
+        <a href="#" class="project-btn">View Project</a>
+        <a href="#" class="project-btn ghost">Source Code</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <div>
+          <h3>DBU Social Network</h3>
+        </div>
+        <div class="project-tag">Web App</div>
+      </div>
+      <p>A social networking platform built for Debre Berhan University students — profiles, posts, friend connections, and a live feed, giving students a home-grown space to connect, share updates, and stay in touch across campus.</p>
+      <div class="stack-row">
+        <span class="chip">Web Development</span>
+        <span class="chip">Database Design</span>
+        <span class="chip">Auth &amp; Profiles</span>
+        <span class="chip">Live Feed</span>
+        <span class="chip">Friend / Connection System</span>
+      </div>
+      <div class="project-links">
+        <a href="#" class="project-btn">View Project</a>
+        <a href="#" class="project-btn ghost">Source Code</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <div>
+          <h3>AI Summarizer</h3>
+        </div>
+        <div class="project-tag">AI Tool</div>
+      </div>
+      <p>A tool that condenses long articles, documents, and notes into clear, accurate summaries — built with automated text-processing pipelines so it can handle different content types quickly and consistently.</p>
+      <div class="stack-row">
+        <span class="chip">Python</span>
+        <span class="chip">LLM Integration</span>
+        <span class="chip">Automation</span>
+        <span class="chip">Text Processing</span>
+      </div>
+      <div class="project-links">
+        <a href="#" class="project-btn">View Project</a>
+        <a href="#" class="project-btn ghost">Source Code</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <div>
+          <h3>🧠 Memory Card Game</h3>
+        </div>
+        <div class="project-tag">Game / Web App</div>
+      </div>
+      <p>An interactive browser-based memory matching game with smooth animations, move tracking, and score results — built to sharpen front-end logic and deliver a genuinely fun, polished user experience.</p>
+      <div class="stack-row">
+        <span class="chip">JavaScript</span>
+        <span class="chip">CSS Animations</span>
+        <span class="chip">Game Logic</span>
+        <span class="chip">UI / UX</span>
+      </div>
+      <div class="project-links">
+        <a href="#" class="project-btn">Play / View Project</a>
+        <a href="#" class="project-btn ghost">Source Code</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <div>
+          <h3>Home Rental &amp; Property Platform</h3>
+        </div>
+        <div class="project-tag">Web App</div>
+      </div>
+      <p>A platform connecting property owners and renters — listing management, search and filtering, and an inquiry/booking flow designed to make finding and posting rental properties simple on both sides.</p>
+      <div class="stack-row">
+        <span class="chip">Web Development</span>
+        <span class="chip">Database Design</span>
+        <span class="chip">Search &amp; Filtering</span>
+        <span class="chip">Listings Management</span>
+      </div>
+      <div class="project-links">
+        <a href="#" class="project-btn">View Project</a>
+        <a href="#" class="project-btn ghost">Source Code</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <div>
+          <h3>Online Campus Student Clearance System</h3>
+        </div>
+        <div class="project-tag">Web App</div>
+      </div>
+      <p>A digital platform that replaces the traditional paper-based university clearance process, letting students, departments, and administrators track and approve clearance steps online — reducing turnaround time and physical bottlenecks at graduation.</p>
+      <div class="stack-row">
+        <span class="chip">Web Development</span>
+        <span class="chip">Database Design</span>
+        <span class="chip">Role-Based Access</span>
+        <span class="chip">Workflow Automation</span>
+      </div>
+      <div class="project-links">
+        <a href="#" class="project-btn">View Project</a>
+        <a href="#" class="project-btn ghost">Source Code</a>
+      </div>
+    </div>
+
+    <div class="project-card upcoming">
+      <div class="project-top">
+        <div>
+          <h3>Next Build — In Progress</h3>
+        </div>
+        <div class="project-tag">Coming Soon</div>
+      </div>
+      <p>Reserved for the next project. This space updates as new work ships — currently exploring ideas at the intersection of infrastructure, security, and entrepreneurship.</p>
+    </div>
+
+  </div>
+</section>
+
+<section id="skills" class="wrap">
+  <div class="section-head">
+    <div class="eyebrow">Skills</div>
+    <h2 class="section-title">What I work with</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-block highlight">
+      <h4>⚡ AI-Assisted Coding &amp; Automation</h4>
+      <div class="skill-note">I code with AI as my core workflow — using AI-assisted, prompt-driven development and automation to go from idea to a real, working build fast, across every project below.</div>
+      <div class="skill-tags">
+        <span>AI-Assisted Development</span>
+        <span>Prompt Engineering</span>
+        <span>Workflow Automation</span>
+        <span>Rapid Prototyping</span>
+        <span>LLM-Driven Builds</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h4>Security</h4>
+      <div class="skill-tags">
+        <span>Penetration Testing</span>
+        <span>Attack Detection</span>
+        <span>Network Monitoring</span>
+        <span>Incident Response</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h4>Machine Learning</h4>
+      <div class="skill-tags">
+        <span>Isolation Forest</span>
+        <span>Anomaly Detection</span>
+        <span>Python</span>
+        <span>Data Pipelines</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h4>Networks &amp; Systems</h4>
+      <div class="skill-tags">
+        <span>Computer Architecture</span>
+        <span>Digital Systems</span>
+        <span>Network Fundamentals</span>
+        <span>Linux and cyber tools</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h4>Web Development</h4>
+      <div class="skill-tags">
+        <span>HTML / CSS / JS</span>
+        <span>MySQL</span>
+        <span>REST APIs</span>
+        <span>Bootstrap</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h4>Tools</h4>
+      <div class="skill-tags">
+        <span>Git</span>
+        <span>Telegram Bot API</span>
+        <span>Leaflet.js</span>
+        <span>VS Code</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h4>Other</h4>
+      <div class="skill-tags">
+        <span>Object-Oriented Programming</span>
+        <span>Control Systems</span>
+        <span>Entrepreneurship</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience" class="wrap">
+  <div class="section-head">
+    <div class="eyebrow">Experience</div>
+    <h2 class="section-title">Where I've been</h2>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="when">Internship</div>
+      <h4>INSA — Information Network Security Agency</h4>
+      <p>Worked on penetration testing and applied cybersecurity, gaining hands-on experience identifying and analyzing real-world vulnerabilities in networked systems.</p>
+    </div>
+    <div class="tl-item">
+      <div class="when">B.Sc. Thesis</div>
+      <h4>Web-Based Cyber Attack Detection &amp; Monitoring System</h4>
+      <p>Designed and built a machine-learning-based intrusion detection system with a live monitoring dashboard, achieving a 95.25% detection rate at 18ms latency.</p>
+    </div>
+    <div class="tl-item">
+      <div class="when">Education</div>
+      <h4>B.Sc. Electrical &amp; Computer Engineering — Debre Berhan University</h4>
+      <p>Computer Engineering stream, covering software, digital systems, computer architecture, and networks.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="wrap">
+  <div class="section-head">
+    <div class="eyebrow">Contact</div>
+    <h2 class="section-title">Let's work together</h2>
+  </div>
+  <div class="contact-box">
+    <div class="contact-info">
+      <p>Open to electrical and computer engineering, network engineering, systems engineering, support engineering, and cybersecurity roles — and always happy to talk about projects or new ventures.</p>
+      <div class="contact-links">
+        <a href="mailto:nahomguta251@gmail.com"><span class="k">Email</span>nahomguta251@gmail.com</a>
+        <a href="tel:+251976430351"><span class="k">Phone</span> +251 976430351</a>
+      </div>
+    </div>
+    <form class="secure-form" action="#" method="post">
+      <label>Name</label>
+      <input type="text" name="name" placeholder="Your name" required>
+      <label>Email</label>
+      <input type="email" name="email" placeholder="you@example.com" required>
+      <label>Message</label>
+      <textarea name="message" rows="4" placeholder="What are you reaching out about?" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 Nahom Guta Degefa. Built with care in Ethiopia.
+</footer>
+
+<script>
+  // typing role rotation
+  const roles = ["AI-Assisted Coder", "Electrical & Computer Engineer", "Cybersecurity Enthusiast", "ML / Attack Detection Builder", "Automation & AI Tooling Builder", "Networking & Systems focus"];
+  const el = document.getElementById('roleText');
+  let ri = 0, ci = 0, deleting = false;
+
+  function typeLoop(){
+    const current = roles[ri];
+    if(!deleting){
+      ci++;
+      el.innerHTML = current.slice(0, ci) + '<span class="caret"></span>';
+      if(ci === current.length){ deleting = true; setTimeout(typeLoop, 1400); return; }
+    } else {
+      ci--;
+      el.innerHTML = current.slice(0, ci) + '<span class="caret"></span>';
+      if(ci === 0){ deleting = false; ri = (ri+1) % roles.length; }
+    }
+    setTimeout(typeLoop, deleting ? 35 : 65);
+  }
+  typeLoop();
+
+  // profile image fallback: if it fails to load, keep placeholder visible
+  const img = document.getElementById('profileImg');
+  const frame = document.getElementById('hexFrame');
+  img.addEventListener('load', () => frame.classList.add('has-photo'));
+  img.addEventListener('error', () => frame.classList.remove('has-photo'));
+
+  // animated stat counters on scroll into view
+  const stats = document.querySelectorAll('.stat .val');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const node = entry.target;
+        const target = parseFloat(node.dataset.target);
+        const suffix = node.dataset.suffix || '';
+        const isDecimal = node.dataset.target.includes('.');
+        let start = 0;
+        const duration = 1200;
+        const startTime = performance.now();
+        function step(now){
+          const progress = Math.min((now - startTime) / duration, 1);
+          const value = target * progress;
+          node.textContent = (isDecimal ? value.toFixed(2) : Math.round(value)) + suffix;
+          if(progress < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+        observer.unobserve(node);
+      }
+    });
+  }, { threshold: 0.5 });
+  stats.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
